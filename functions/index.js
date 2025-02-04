@@ -1,0 +1,1 @@
+const functions = require("firebase-functions"); const admin = require("firebase-admin"); admin.initializeApp(); exports.processVideo = functions.storage.object().onFinalize(async (object) => { console.log("New video uploaded:", object.name); });
