@@ -1,0 +1,149 @@
+# AIVideoEditor Setup Instructions
+
+## Prerequisites
+1. Make sure you have Xcode 14.0 or later installed
+2. Make sure you have Swift 5.9 or later installed
+3. Ensure you're on macOS 11.0 or later
+
+## Project Setup Steps
+
+1. Create Project Structure
+   ```
+   AIVideoEditor/
+   ├── Package.swift
+   └── Sources/
+       └── AIVideoEditor/
+           ├── main.swift
+           ├── App.swift
+           └── Views/
+               └── ContentView.swift
+   ```
+
+2. Configure Package.swift
+   - Open Package.swift
+   - Replace contents with:
+   ```swift
+   // swift-tools-version: 5.9
+   import PackageDescription
+
+   let package = Package(
+       name: "AIVideoEditor",
+       platforms: [
+           .macOS(.v11)
+       ],
+       products: [
+           .executable(
+               name: "AIVideoEditor",
+               targets: ["AIVideoEditor"]
+           ),
+       ],
+       dependencies: [],
+       targets: [
+           .executableTarget(
+               name: "AIVideoEditor",
+               dependencies: []
+           ),
+       ]
+   )
+   ```
+
+3. Create ContentView.swift
+   - Create file at Sources/AIVideoEditor/Views/ContentView.swift
+   - Add content:
+   ```swift
+   import SwiftUI
+
+   @available(macOS 11.0, *)
+   public struct ContentView: View {
+       public init() {}
+       
+       public var body: some View {
+           NavigationView {
+               Text("AI Video Editor")
+                   .font(.largeTitle)
+                   .navigationTitle("Home")
+           }
+       }
+   }
+   ```
+
+4. Create main.swift
+   - Create file at Sources/AIVideoEditor/main.swift
+   - Add content:
+   ```swift
+   import AppKit
+   import SwiftUI
+
+   let app = NSApplication.shared
+   let delegate = AppDelegate()
+   app.delegate = delegate
+   _ = NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)
+
+   class AppDelegate: NSObject, NSApplicationDelegate {
+       var window: NSWindow!
+       
+       func applicationDidFinishLaunching(_ notification: Notification) {
+           window = NSWindow(
+               contentRect: NSRect(x: 0, y: 0, width: 800, height: 600),
+               styleMask: [.titled, .closable, .miniaturizable, .resizable],
+               backing: .buffered,
+               defer: false
+           )
+           window.title = "AI Video Editor"
+           window.center()
+           
+           let contentView = ContentView()
+           window.contentView = NSHostingView(rootView: contentView)
+           window.makeKeyAndOrderFront(nil)
+       }
+       
+       func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+           return true
+       }
+   }
+   ```
+
+## Build and Run Instructions
+
+1. Clean Build Directory
+   ```bash
+   swift package clean
+   ```
+
+2. Build Project
+   ```bash
+   swift build -v -Xswiftc "-target" -Xswiftc "arm64-apple-macosx11.0"
+   ```
+
+3. Run Application
+   ```bash
+   .build/arm64-apple-macosx/debug/AIVideoEditor
+   ```
+
+## Troubleshooting
+
+1. If you see "No such module" errors:
+   - Clean the build folder: `swift package clean`
+   - Rebuild with: `swift build`
+
+2. If you see availability errors:
+   - Ensure your macOS version is 11.0 or later
+   - Check @available attributes in your code match minimum deployment target
+
+3. If window doesn't appear:
+   - Check Console.app for any error messages
+   - Verify all SwiftUI views are properly wrapped with @available attributes
+
+## Next Steps
+
+1. Add additional views under Sources/AIVideoEditor/Views/
+2. Implement video editing features
+3. Add tests under Tests/AIVideoEditorTests/
+4. Configure CI/CD pipeline
+
+## Notes
+
+- The project requires macOS 11.0 or later due to SwiftUI features
+- All SwiftUI views should include @available(macOS 11.0, *) attribute
+- Use main.swift for app initialization and window management
+- Keep UI components in the Views directory for organization 

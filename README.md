@@ -1,39 +1,88 @@
-# AI Video Editor for Educational Content
+# AI Video Editor
 
-An iOS application that enables educators to create and edit educational video content using AI-powered tools.
+An iOS application for educational content creators to edit and enhance video lectures using AI-powered tools.
+
+## Features
+
+- Upload and process educational videos
+- Automatic transcription and segmentation
+- Smart editing commands for quick modifications
+- Role-based access (teachers and students)
+- Real-time analytics and crash reporting
+
+## Requirements
+
+- iOS 14.0+
+- Xcode 15.0+
+- Swift 5.9+
+- macOS 13.0+ (for development)
+
+## Dependencies
+
+### Firebase
+- FirebaseAnalytics: Analytics and user tracking
+- FirebaseAuth: User authentication
+- FirebaseFirestore: Database storage
+- FirebaseFirestoreSwift: Swift integration for Firestore
+- FirebaseStorage: Video file storage
+- FirebaseCrashlytics: Crash reporting
+
+### Networking
+- Alamofire: HTTP networking
+
+### Development
+- SwiftLint: Code style enforcement
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/ai-video-editor.git
+cd ai-video-editor
+```
+
+2. Install dependencies using Swift Package Manager:
+```bash
+swift package resolve
+```
+
+3. Create a Firebase project and download `GoogleService-Info.plist`
+4. Add `GoogleService-Info.plist` to the project
+5. Open `AIVideoEditor.xcodeproj` in Xcode
+6. Build and run the project
 
 ## Project Structure
 
-- `/Documentation` - Project documentation and specifications
-- `/src`
-  - `/frontend` - iOS application source code
-  - `/backend` - Backend services and Firebase configuration
-- `/assets` - Project assets and resources
+```
+AIVideoEditor/
+├── Sources/
+│   ├── AIVideoEditorApp/
+│   │   └── App entry point
+│   └── AIVideoEditorLib/
+│       ├── Models/
+│       ├── Views/
+│       ├── Services/
+│       ├── Core/
+│       └── Resources/
+├── Tests/
+│   └── AIVideoEditorTests/
+└── Package.swift
+```
 
-## Setup Requirements
+## Development
 
-- Xcode 14.0+
-- iOS 15.0+
-- Firebase Account
-- Google Cloud Speech-to-Text API access
-- GPT/NLP Service API access
+- Follow SwiftLint rules for code style
+- Write unit tests for new features
+- Update documentation when making changes
+- Use semantic versioning for releases
 
-## Getting Started
+## Testing
 
-1. Clone the repository
-2. Install dependencies
-3. Configure Firebase credentials
-4. Set up environment variables
-5. Build and run the project
-
-## Documentation
-
-Refer to the `/Documentation` directory for detailed information about:
-- Project requirements
-- Architecture diagrams
-- API specifications
-- Development guidelines
+Run the test suite:
+```bash
+swift test
+```
 
 ## License
 
-[License details to be added]
+This project is licensed under the MIT License - see the LICENSE file for details.

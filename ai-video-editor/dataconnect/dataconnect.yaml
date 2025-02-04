@@ -1,0 +1,12 @@
+specVersion: "v1beta"
+serviceId: "ai-video-editor"
+location: "us-central1"
+schema:
+  source: "./schema"
+  datasource:
+    postgresql:
+      database: "fdcdb"
+      cloudSql:
+        instanceId: "ai-video-editor-fdc"
+      # schemaValidation: "COMPATIBLE"
+connectorDirs: ["./connector"]
